@@ -57,16 +57,21 @@ class App extends Component {
         			<Route exact path='/'>
                     	<ActivitySelection setTransparentToFalse={setTransparentToFalse} />
                     </Route>        			
-        			<Route path='/rock-cycling'>
+        			
+					<Route path='/rock-cycling'>
                     	<RockCycling setTransparentToTrue={setTransparentToTrue} />
-                    </Route>        			
-        			<Route path='/horarios'>
+                    </Route>        		
+									{ /* Calendar */ }	
+        			<Route path='/horarios'> 
                     	<Horarios mode={mode} setTransparentToFalse={setTransparentToFalse}/>
                     </Route>     
+					
 					{/* In the future, this Edit route will be added with the :id in the path*/}
 					<Route path='/edit'>
                     	<Edit />
                     </Route>
+
+									{ /* Profile */ }
         			<Route path='/configuracion'>
                     	<Configuracion 
 							setTransparentToFalse={setTransparentToFalse} 
@@ -77,7 +82,8 @@ class App extends Component {
         			<Route path='/editar'>
                     	<Editar mode={mode}/>
                     </Route>
-        			<Route path='/gym-editar'>
+        			
+					<Route path='/gym-editar'>
                     	<GymEditar />
                     </Route>
         		</Switch>
