@@ -18,6 +18,7 @@ class MemberDetailsForm extends Component {
 		}
 
 		this.handleInput = this.handleInput.bind(this);
+		this.submitForm = this.submitForm.bind(this);
 	}
 
 	handleInput(field, event){
@@ -54,12 +55,16 @@ class MemberDetailsForm extends Component {
 		}
 	}
 
+	submitForm(event){
+		event.preventDefault();
+	}
+
 	render() {
     	return (
         <Fragment>
 			<div className="container">
         	<div className="col-12 row">
-        		<form className="editar-form">
+        		<form className="editar-form" onSubmit={this.submitForm}>
             		<div className="col-12">
             			<div className="col-6">
         					
@@ -92,10 +97,28 @@ class MemberDetailsForm extends Component {
 							}/>
 
 						</div>
-						<div className="col-6 photo-box">
-                        	<img src={ProfilePic} alt="Your profile picture"  style={{width: '100%'}}/>
+
+						<div className="col-6 photo-box"  onClick={ 
+								(event)=>{
+									document.getElementById('profile_pic').click();
+								}
+							}>
+
+							<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
+								(event) => {
+									event.persist();
+									let f = new FileReader();
+									f.readAsDataURL(event.target.files[0]);
+									f.onload = (res) => {
+										document.getElementById('profile_pic_preview').src = res.target.result;
+									}
+								}
+							 }/>
+                        	<img src={ProfilePic} alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}/>
 							<p className="text-center">Camblar foto</p>
+
                         </div>
+
 					</div>
             		<div className="col-12 row">
             			<div className="col-6">
@@ -134,10 +157,17 @@ class MemberDetailsForm extends Component {
             		<div className="col-12 row">
             			<div className="center-col-12 row upload">
                         	<div className="col-6">
-        						<label>Certificado medico</label>
+        						<label>
+									<span>Certificado medico </span>
+									<span id="certificate_filename" style={{color: 'red'}}></span>
+								</label>
 							</div>
                             <div className="col-6">
-                            <input type="file" id="files" style={{ display: 'none' }}/>
+                            <input type="file" id="files" style={{ display: 'none' }} onChange={ 
+								(event) => {
+									document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+								}
+							}/>
 							<button id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
                             </div>
 						</div>
