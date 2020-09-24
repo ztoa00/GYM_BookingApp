@@ -4,6 +4,7 @@ import React, { Fragment, Component } from 'react';
 import ProfilePic from './images/profile-picture.png';
 
 class MemberDetailsForm extends Component {
+
 	render() {
     	return (
         <Fragment>
