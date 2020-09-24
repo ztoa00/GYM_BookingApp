@@ -90,8 +90,20 @@ class OwnerDetailsForm extends Component {
 							}/>
 
 						</div>
-						<div className="col-6 photo-box">
-                        	<img src={ProfilePic} alt="Your profile picture"  style={{width: '100%'}}/>
+						<div className="col-6 photo-box" onClick={
+							event => document.getElementById('profile_pic').click()
+						}>
+							<input type="file" id='profile_pic' style={{display: 'none'}} onChange={
+								(event) => {
+									event.persist();
+									let f = new FileReader();
+									f.readAsDataURL(event.target.files[0]);
+									f.onload = (data) => {
+										document.getElementById('profile_pic_preview').src = data.target.result;
+									}
+								}
+							 }/>
+                        	<img src={ProfilePic} alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}/>
 							<p className="text-center">Camblar foto</p>
                         </div>
 					</div>
@@ -126,11 +138,18 @@ class OwnerDetailsForm extends Component {
             		<div className="col-12 row">
             			<div className="center-col-12 row upload">
                         	<div className="col-6">
-        						<label>Certificado medico</label>
+        						<label>
+									<span>Certificado medico </span>
+									<span id='certificate_filename' style={{display:'red'}}></span>
+								</label>
 							</div>
                             <div className="col-6">
 
-                            <input type="file" id="files" style={{ display: 'none' }}/>
+                            <input type="file" id="files" style={{ display: 'none' }} onChange={ 
+								(event) => {
+									document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+								}
+							 }/>
 							<button className="blue" id="select-file" onClick={ (event) =>
 								{ 
 									event.preventDefault();

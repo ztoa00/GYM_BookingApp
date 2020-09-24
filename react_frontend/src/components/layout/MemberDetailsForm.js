@@ -99,10 +99,7 @@ class MemberDetailsForm extends Component {
 						</div>
 
 						<div className="col-6 photo-box"  onClick={ 
-								(event)=>{
-									document.getElementById('profile_pic').click();
-								}
-							}>
+								event => document.getElementById('profile_pic').click() }>
 
 							<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
 								(event) => {
