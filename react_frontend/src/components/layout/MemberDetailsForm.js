@@ -165,7 +165,7 @@ class MemberDetailsForm extends Component {
 									document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
 								}
 							}/>
-							<button id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
+							<button type="button" id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
                             </div>
 						</div>
 					</div>
