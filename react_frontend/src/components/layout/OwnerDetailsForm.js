@@ -145,7 +145,7 @@ class OwnerDetailsForm extends Component {
             			<div className="col-8" style={{paddingRight: '16px'}}>
 
         					<label>Mi gym</label>
-                        	<input type="text" value={ my_gym } onChange={ (event) => {
+                        	<input type="text" value={ this.state.my_gym } onChange={ (event) => {
 								this.handleInput("my_gym", event);
 							} }/>
 
