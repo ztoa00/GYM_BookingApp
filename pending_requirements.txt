@@ -24,18 +24,13 @@ In MemberDetailsForm.js in component/layout and
 In OwnerDetailsForm.js in component/layout
 
 3.a)
-In user details edit page, you need to convert certificate button to input type bcz once we click that button 
-it need to popup for file selection but it send data to action this is wrong
-so i removed this button and we have input field for that but its not visble why? 
-any how, we need to change that as input button for selectiong file only not to send request of submiting form
-
-3.b)
-In user details edit page add update the enter details while enter user details 
-
-3.c)
-In user details edit page user profile is need to send with input to form like
-{/* input type=file name="profile_pic"  */}
-
+Profile pic to be fixed on circle or square but to be in fixed frame inside that we need to render the selected img
+3.b) 
+mouse over the button or image need to change like hand symbol or anyother to point that its also input or its have event 
+3.c) 
+send a form data to bacckend api
+3.d)
+remove style background in profile picture img tag
 
 4)
 Gym page

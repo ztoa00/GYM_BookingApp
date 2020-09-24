@@ -15,11 +15,12 @@ class OwnerDetailsForm extends Component {
 			dob: "",
 			phone: "",
 			emergency_telephone: "",
-			mail: "",
-			my_gym: ""
+			mail: ""
 		}
-	}
 
+		this.handleInput = this.handleInput.bind(this);
+		this.submitForm = this.submitForm.bind(this);
+	}
 
 	handleInput(field, event){
 		event.persist();
@@ -52,20 +53,19 @@ class OwnerDetailsForm extends Component {
 				return {...prev, mail: event.target.value }
 				});
 				break;
-			case "my_gym": this.setState((prev)=>{
-				return {...prev, my_gym: event.target.value }
-				});
-				break;	
 		}
 	}
 
+	submitForm(event){
+		event.preventDefault();
+	}
 
 	render() {
     	return (
         <Fragment>
 			<div className="container">
         	<div className="col-12 row">
-        		<form className="editar-form">
+        		<form className="editar-form" onSubmit={this.submitForm}>
             		<div className="col-12">
             			<div className="col-6">
 
@@ -90,9 +90,9 @@ class OwnerDetailsForm extends Component {
 							}/>
 
 						</div>
-						<div className="col-6 photo-box" onClick={
-							event => document.getElementById('profile_pic').click()
-						}>
+
+						<div className="col-6 photo-box" >
+
 							<input type="file" id='profile_pic' style={{display: 'none'}} onChange={
 								(event) => {
 									event.persist();
@@ -103,16 +103,25 @@ class OwnerDetailsForm extends Component {
 									}
 								}
 							 }/>
-                        	<img src={ProfilePic} alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}/>
+							<img src={ProfilePic} 
+								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', background:'blue'}}
+								 onClick={
+									event => document.getElementById('profile_pic').click()
+								}
+							/>
 							<p className="text-center">Camblar foto</p>
+
                         </div>
+
 					</div>
             		<div className="col-12 row">
             			<div className="col-6">
 
         					<label>Numero de telefono*</label>
 							<input type="tel" value={this.state.phone} onChange={
-								(event) => {this.handleInput("phone", event)}
+								(event) => {
+									this.handleInput("phone", event)
+								}
 							}/>
 							
 						</div>
@@ -120,7 +129,9 @@ class OwnerDetailsForm extends Component {
 
         					<label>Tel. emergencia</label>
 							<input type="tel" value={this.state.emergency_telephone} onChange={
-								(event) => {this.handleInput("emergency_telephone", event)}
+								(event) => {
+									this.handleInput("emergency_telephone", event)
+								}
 							}/>
 
 						</div>
@@ -130,7 +141,9 @@ class OwnerDetailsForm extends Component {
 
         					<label>Mail*</label>
 							<input type="email" value={this.state.mail} onChange={
-								(event) => {this.handleInput("mail", event)}
+								(event) => {
+									this.handleInput("mail", event)
+								}
 							}/>
 
 						</div>
@@ -140,39 +153,27 @@ class OwnerDetailsForm extends Component {
                         	<div className="col-6">
         						<label>
 									<span>Certificado medico </span>
-									<span id='certificate_filename' style={{display:'red'}}></span>
+									<span id='certificate_filename' style={{color:'blue'}}></span>
 								</label>
 							</div>
                             <div className="col-6">
-
-                            <input type="file" id="files" style={{ display: 'none' }} onChange={ 
-								(event) => {
-									document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
-								}
-							 }/>
-							<button className="blue" id="select-file" onClick={ (event) =>
-								{ 
-									event.preventDefault();
-									document.getElementById('files').click();
-								} 
-							}>Cargar</button>
-
+								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
+									(event) => {
+										document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+									}
+								}/>
+								<button v className="blue" id="select-file" onClick={ () =>{ document.getElementById('files').click() } }>Cargar</button>
                             </div>
 						</div>
 					</div>
             		<div className="center-col-12">
             			<div className="col-8" style={{paddingRight: '16px'}}>
-
         					<label>Mi gym</label>
-                        	<input type="text" value={ this.state.my_gym } onChange={ (event) => {
-								this.handleInput("my_gym", event);
-							} }/>
-
 						</div>
 						<div className="col-4">
-							<button className="blue" id="select-file" onClick={
-								(event) => { event.preventDefault(); }
-							}><Link to='/gym-editar'>Editar</Link></button>
+							<button type="button" className="blue" id="select-file" >
+								<Link to='/gym-editar'>Editar</Link>
+							</button>
                         </div>
 					</div>
 					<div className="center-col-12">

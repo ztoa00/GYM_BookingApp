@@ -98,8 +98,7 @@ class MemberDetailsForm extends Component {
 
 						</div>
 
-						<div className="col-6 photo-box"  onClick={ 
-								event => document.getElementById('profile_pic').click() }>
+						<div className="col-6 photo-box" >
 
 							<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
 								(event) => {
@@ -111,7 +110,12 @@ class MemberDetailsForm extends Component {
 									}
 								}
 							 }/>
-                        	<img src={ProfilePic} alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}/>
+							<img src={ProfilePic} 
+								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', background:'red'}} 
+								 onClick={ 
+									event => document.getElementById('profile_pic').click() 
+								} 
+							/>
 							<p className="text-center">Camblar foto</p>
 
                         </div>
@@ -160,12 +164,12 @@ class MemberDetailsForm extends Component {
 								</label>
 							</div>
                             <div className="col-6">
-                            <input type="file" id="files" style={{ display: 'none' }} onChange={ 
-								(event) => {
-									document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
-								}
-							}/>
-							<button type="button" id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
+								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
+									(event) => {
+										document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+									}
+								}/>
+								<button type="button" id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
                             </div>
 						</div>
 					</div>
