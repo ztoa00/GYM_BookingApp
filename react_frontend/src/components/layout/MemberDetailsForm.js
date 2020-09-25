@@ -156,8 +156,7 @@ class MemberDetailsForm extends Component {
 									else{
 										let f = new FileReader();
 										f.readAsDataURL(this.state.profile_picture);
-										f.onload = (res) => {
-											console.log(res.target.result);
+										f.onload = res => {
 											document.getElementById('profile_pic_preview').src = res.target.result;
 										}
 									}

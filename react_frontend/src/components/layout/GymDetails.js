@@ -28,9 +28,15 @@ const GymDetails = () => {
 		mail_field_disabled: true,
 	});
 
+	const image_style = {
+		width: "100%",
+		height: "300px",
+		padding: "10%",
+		borderRadius: "50px",
+	};
+
 	function handleChange(field, event){
 		event.persist();
-		console.log(event.target.value);
 		switch(field){
 			case "gym_name": set_gym_details({ ...gym_details, gym_name: event.target.value }); break;
 			case "gym_description": set_gym_details({ ...gym_details, gym_description: event.target.value }); break;
@@ -66,8 +72,9 @@ const GymDetails = () => {
     			<div className="col-12">
 
 					{
-						page_settings.description_field_disabled ? <p>{ gym_details.gym_description }</p> :
-						<textarea id="gym_description" className="description-text" style={{ background: "none", resize:"none" }}>
+						page_settings.description_field_disabled ? <p>&nbsp;{ gym_details.gym_description }</p> :
+						<textarea id="gym_description" className="description-text" style={{ background: "none", resize:"none" }}
+						onChange={ event => handleChange("gym_description", event) }>
 							{ gym_details.gym_description }
 						</textarea>
 					}
@@ -79,14 +86,56 @@ const GymDetails = () => {
 
     			</div>
     			<div className="col-4">
-    				<img src={ gym_details.gym_picture_1_file_path } alt="Photo 1" />
-    			</div>    			
-				<div className="col-4">
-    				<img src={ gym_details.gym_picture_2_file_path } alt="Photo 2" />
-    			</div>    			
-				<div className="col-4">
-    				<img src={ gym_details.gym_picture_3_file_path } alt="Photo 3" />
+
+					<input type="file" style={{ display: "none" }} id="pic1_file" onChange={ event => {
+						event.persist();
+						if(event.target.files[0] !== undefined){
+							let f = new FileReader();
+							f.readAsDataURL(event.target.files[0]);
+							f.onload = res => {
+								document.getElementById('pic1').src = res.target.result;
+							}
+						}
+					}} />
+    				<img id="pic1" src={ gym_details.gym_picture_1_file_path } alt="Photo 1" style={{ cursor: "pointer" }} 
+					onClick={ event => document.getElementById('pic1_file').click() } style={ image_style } />
+
     			</div>
+
+				<div className="col-4">
+
+					<input type="file" style={{ display: "none" }} id="pic2_file" onChange={ event => {
+						event.persist();
+						if(event.target.files[0] !== undefined){
+							let f = new FileReader();
+							f.readAsDataURL(event.target.files[0]);
+							f.onload = res => {
+								document.getElementById('pic2').src = res.target.result;
+							}
+						}
+					}}/>
+    				<img id="pic2" src={ gym_details.gym_picture_2_file_path } alt="Photo 2" style={{ cursor: "pointer" }} 
+					onClick={ event => document.getElementById('pic2_file').click() } style={ image_style }/>
+    			
+				</div>    	
+
+				<div className="col-4">
+
+					<input type="file" style={{ display: "none" }} id="pic3_file" onChange={ event => {
+						event.persist();
+						if(event.target.files[0] !== undefined){
+							let f = new FileReader();
+							f.readAsDataURL(event.target.files[0]);
+							f.onload = res => {
+								document.getElementById('pic3').src = res.target.result;
+							}
+						}
+					}}/>
+    				<img id="pic3" src={ gym_details.gym_picture_3_file_path } alt="Photo 3" style={{ cursor: "pointer" }} 
+					onClick={ event => document.getElementById('pic3_file').click() } style={ image_style }/>
+
+    			</div>
+
 				<p style={{textAlign: 'right'}}>Ver mas <i className="fas fa-edit"></i></p>
 				<div className="col-12">
             		<img src={ gym_details.gym_location } alt="Map" />
