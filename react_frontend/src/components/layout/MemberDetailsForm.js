@@ -1,7 +1,9 @@
 import React, { Fragment, Component } from 'react';
-
-// Import images
 import ProfilePic from './images/profile-picture.png';
+
+
+const FORM_SUBMISSION_URL = "/";
+
 
 class MemberDetailsForm extends Component {
 
@@ -15,6 +17,8 @@ class MemberDetailsForm extends Component {
 			phone: "",
 			emergency_telephone: "",
 			mail: "",
+			certificate: null,
+			profile_picture: null,
 		}
 
 		this.handleInput = this.handleInput.bind(this);
@@ -59,6 +63,37 @@ class MemberDetailsForm extends Component {
 
 	submitForm(event){
 		event.preventDefault();
+		let data = {
+			user: this.state.userid,
+			first_name: this.state.first_name,
+			last_name: this.state.last_name,
+			dob: this.state.dob,
+			phone: this.state.phone,
+			emergency_telephone: this.state.emergency_telephone,
+			mail: this.state.mail,
+			certificate: this.state.certificate,
+			profile_picture: this.state.profile_picture,
+		};	
+
+		fetch(FORM_SUBMISSION_URL, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		}).then( res => {
+			console.log(data);
+			if(!res.ok){
+				alert("retry");
+			}
+			else{
+				let data = res.json();
+				alert("Updated");
+			}
+		},
+		).catch( err => {
+			alert(err);
+		});
 	}
 
 
@@ -104,18 +139,28 @@ class MemberDetailsForm extends Component {
 						<div className="col-6 photo-box" >
 
 							<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
-								(event) => {
+								event => {
 									event.persist();
-									let f = new FileReader();
 									if(event.target.files[0] != undefined){
-										f.readAsDataURL(event.target.files[0]);
-										f.onload = (res) => {
-											document.getElementById('profile_pic_preview').src = res.target.result;
-										}
+										this.setState( prev => {
+											return { ...prev, profile_picture: event.target.files[0] }
+										})		
 									}
 								}
 							 }/>
-							<img src={ProfilePic} 
+							<img src={ (()=>{
+								if(this.state.profile_picture === null ){
+									return ProfilePic;
+								}
+								else{
+									let f = new FileReader();
+									f.readAsDataURL(this.state.profile_picture);
+									f.onload = (res) => {
+										console.log(res.target.result);
+										document.getElementById('profile_pic_preview').src = res.target.result;
+									}
+								}
+							})()} 
 								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', cursor: 'pointer'}} 
 								 onClick={ 
 									event => document.getElementById('profile_pic').click() 
@@ -165,14 +210,19 @@ class MemberDetailsForm extends Component {
                         	<div className="col-6">
         						<label>
 									<span>Certificado medico </span>
-									<span id="certificate_filename" style={{color: 'red'}}></span>
+						<span id="certificate_filename" style={{color: 'red'}}>{
+							this.state.certificate  !== null && ":" + this.state.certificate.name
+						}</span>
 								</label>
 							</div>
                             <div className="col-6">
 								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
 									event => {
+										event.persist();
 										if(event.target.files[0] != undefined){
-											document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+											this.setState(prev => {
+												return { ...prev, certificate: event.target.files[0] }
+											});
 										}
 									}
 								}/>

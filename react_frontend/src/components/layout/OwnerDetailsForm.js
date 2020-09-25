@@ -1,8 +1,9 @@
 import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
-
-// Import images
 import ProfilePic from './images/profile-picture.png';
+
+
+const FORM_SUBMISSION_URL = "/";
 
 class OwnerDetailsForm extends Component {
 
@@ -15,7 +16,9 @@ class OwnerDetailsForm extends Component {
 			dob: "",
 			phone: "",
 			emergency_telephone: "",
-			mail: ""
+			mail: "",
+			certificate: null,
+			profile_picture: null,
 		}
 
 		this.handleInput = this.handleInput.bind(this);
@@ -58,7 +61,39 @@ class OwnerDetailsForm extends Component {
 
 	submitForm(event){
 		event.preventDefault();
+		let data = {
+			user: this.state.userid,
+			first_name: this.state.first_name,
+			last_name: this.state.last_name,
+			dob: this.state.dob,
+			phone: this.state.phone,
+			emergency_telephone: this.state.emergency_telephone,
+			mail: this.state.mail,
+			certificate: this.state.certificate,
+			profile_picture: this.state.profile_picture,
+		};	
+
+		fetch(FORM_SUBMISSION_URL, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		}).then( res => {
+			console.log(data);
+			if(!res.ok){
+				alert("retry");
+			}
+			else{
+				let data = res.json();
+				alert("Updated");
+			}
+		},
+		).catch( err => {
+			alert(err);
+		});
 	}
+
 
 	render() {
     	return (
@@ -94,18 +129,29 @@ class OwnerDetailsForm extends Component {
 						<div className="col-6 photo-box" >
 
 							<input type="file" id='profile_pic' style={{display: 'none'}} onChange={
-								(event) => {
+								event => {
 									event.persist();
-									let f = new FileReader();
 									if(event.target.files[0] != undefined){
-										f.readAsDataURL(event.target.files[0]);
-										f.onload = (data) => {
-											document.getElementById('profile_pic_preview').src = data.target.result;
-										}
+										this.setState( prev => {
+											return { ...prev, profile_picture: event.target.files[0] }
+										})		
 									}
 								}
 							 }/>
-							<img src={ProfilePic} 
+
+							<img src={ (()=>{
+								if(this.state.profile_picture === null ){
+									return ProfilePic;
+								}
+								else{
+									let f = new FileReader();
+									f.readAsDataURL(this.state.profile_picture);
+									f.onload = (res) => {
+										console.log(res.target.result);
+										document.getElementById('profile_pic_preview').src = res.target.result;
+									}
+								}
+							})()} 
 								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', cursor: 'pointer'}}
 								 onClick={
 									event => document.getElementById('profile_pic').click()
@@ -155,18 +201,24 @@ class OwnerDetailsForm extends Component {
                         	<div className="col-6">
         						<label>
 									<span>Certificado medico </span>
-									<span id='certificate_filename' style={{color:'blue'}}></span>
+									<span id='certificate_filename' style={{color:'blue'}}>
+										{ this.state.certificate  !== null && ":" + this.state.certificate.name }
+									</span>
 								</label>
 							</div>
                             <div className="col-6">
 								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
 									event => {
+										event.persist();
 										if(event.target.files[0] != undefined){
-											document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+											this.setState( prev => {
+												return { ...prev, certificate: event.target.files[0] }
+											})
 										}
 									}
 								}/>
-								<button v className="blue" id="select-file" onClick={ event => document.getElementById('files').click() }>Cargar</button>
+								<button v className="blue" id="select-file" type="button"
+								onClick={ event => document.getElementById('files').click() }>Cargar</button>
                             </div>
 						</div>
 					</div>
