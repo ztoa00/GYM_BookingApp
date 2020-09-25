@@ -232,6 +232,7 @@ class OwnerDetailsForm extends Component {
 							</button>
                         </div>
 					</div>
+					<br />
 					<div className="center-col-12">
 						<button type="submit" className="blue" id="reservar">Actualizar</button>
 					</div>
