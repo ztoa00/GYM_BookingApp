@@ -127,7 +127,7 @@ class OwnerDetailsForm extends Component {
 						</div>
 
 						<div className="col-6 photo-box" >
-
+							
 							<input type="file" id='profile_pic' style={{display: 'none'}} onChange={
 								event => {
 									event.persist();
@@ -138,25 +138,28 @@ class OwnerDetailsForm extends Component {
 									}
 								}
 							 }/>
-
-							<img src={ (()=>{
-								if(this.state.profile_picture === null ){
-									return ProfilePic;
-								}
-								else{
-									let f = new FileReader();
-									f.readAsDataURL(this.state.profile_picture);
-									f.onload = (res) => {
-										console.log(res.target.result);
-										document.getElementById('profile_pic_preview').src = res.target.result;
+							<center>
+								<img src={ (()=>{
+									if(this.state.profile_picture === null ){
+										return ProfilePic;
 									}
-								}
-							})()} 
-								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', cursor: 'pointer'}}
-								 onClick={
-									event => document.getElementById('profile_pic').click()
-								}
-							/>
+									else{
+										let f = new FileReader();
+										f.readAsDataURL(this.state.profile_picture);
+										f.onload = (res) => {
+											console.log(res.target.result);
+											document.getElementById('profile_pic_preview').src = res.target.result;
+										}
+									}
+								})()} 
+									alt="Your profile picture" id='profile_pic_preview' style={
+										{ width: '200px', cursor: 'pointer', height: "200px", borderRadius:"50%", border:"5px solid lightblue" }
+										}
+									onClick={
+										event => document.getElementById('profile_pic').click()
+									}
+								/>
+							</center>
 							<p className="text-center">Camblar foto</p>
 
                         </div>
