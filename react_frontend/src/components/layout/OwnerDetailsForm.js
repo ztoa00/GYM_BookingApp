@@ -106,7 +106,7 @@ class OwnerDetailsForm extends Component {
 								}
 							 }/>
 							<img src={ProfilePic} 
-								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}
+								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', cursor: 'pointer'}}
 								 onClick={
 									event => document.getElementById('profile_pic').click()
 								}
