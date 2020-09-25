@@ -97,14 +97,16 @@ class OwnerDetailsForm extends Component {
 								(event) => {
 									event.persist();
 									let f = new FileReader();
-									f.readAsDataURL(event.target.files[0]);
-									f.onload = (data) => {
-										document.getElementById('profile_pic_preview').src = data.target.result;
+									if(event.target.files[0] != undefined){
+										f.readAsDataURL(event.target.files[0]);
+										f.onload = (data) => {
+											document.getElementById('profile_pic_preview').src = data.target.result;
+										}
 									}
 								}
 							 }/>
 							<img src={ProfilePic} 
-								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', background:'blue'}}
+								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}}
 								 onClick={
 									event => document.getElementById('profile_pic').click()
 								}
@@ -158,11 +160,13 @@ class OwnerDetailsForm extends Component {
 							</div>
                             <div className="col-6">
 								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
-									(event) => {
-										document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+									event => {
+										if(event.target.files[0] != undefined){
+											document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+										}
 									}
 								}/>
-								<button v className="blue" id="select-file" onClick={ () =>{ document.getElementById('files').click() } }>Cargar</button>
+								<button v className="blue" id="select-file" onClick={ event => document.getElementById('files').click() }>Cargar</button>
                             </div>
 						</div>
 					</div>

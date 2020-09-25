@@ -21,6 +21,7 @@ class MemberDetailsForm extends Component {
 		this.submitForm = this.submitForm.bind(this);
 	}
 
+
 	handleInput(field, event){
 		event.persist();
 		switch(field){
@@ -55,9 +56,11 @@ class MemberDetailsForm extends Component {
 		}
 	}
 
+
 	submitForm(event){
 		event.preventDefault();
 	}
+
 
 	render() {
     	return (
@@ -104,14 +107,16 @@ class MemberDetailsForm extends Component {
 								(event) => {
 									event.persist();
 									let f = new FileReader();
-									f.readAsDataURL(event.target.files[0]);
-									f.onload = (res) => {
-										document.getElementById('profile_pic_preview').src = res.target.result;
+									if(event.target.files[0] != undefined){
+										f.readAsDataURL(event.target.files[0]);
+										f.onload = (res) => {
+											document.getElementById('profile_pic_preview').src = res.target.result;
+										}
 									}
 								}
 							 }/>
 							<img src={ProfilePic} 
-								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%', background:'red'}} 
+								 alt="Your profile picture" id='profile_pic_preview' style={{width: '100%'}} 
 								 onClick={ 
 									event => document.getElementById('profile_pic').click() 
 								} 
@@ -165,11 +170,13 @@ class MemberDetailsForm extends Component {
 							</div>
                             <div className="col-6">
 								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
-									(event) => {
-										document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+									event => {
+										if(event.target.files[0] != undefined){
+											document.getElementById('certificate_filename').innerHTML = ":" + event.target.files[0].name;
+										}
 									}
 								}/>
-								<button type="button" id="select-file" onClick={ ()=>{ document.getElementById('files').click() } }>Cargar</button>
+								<button type="button" id="select-file" onClick={ event => document.getElementById('files').click() }>Cargar</button>
                             </div>
 						</div>
 					</div>
@@ -183,5 +190,6 @@ class MemberDetailsForm extends Component {
         );
     }
 }
+
 
 export default MemberDetailsForm;
