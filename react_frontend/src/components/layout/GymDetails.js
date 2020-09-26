@@ -7,8 +7,22 @@ import Photo3 from './images/photo3.png';
 import Map_Image from './images/map.png';
 
 const GymDetails = () => {
+	const image_style = {
+		width: "100%",
+		height: "300px",
+		padding: "10%",
+		borderRadius: "50px",
+	};
 
-	const [gym_details, set_gym_details] = useState({
+	const button_style = {
+		background: "lightblue",
+		paddingLeft: "2%",
+		paddingRight: "2%",
+		color: "white",
+		margin: "1%",
+	}
+
+	let initial_state = {
 		gym_id: null,
 		gym_owner_id: null,
 		gym_name: "Buba Gym",
@@ -19,7 +33,9 @@ const GymDetails = () => {
 		gym_location: Map_Image,
 		gym_email: "bubagym@gmail.com",
 		gym_phone_number: "+12345678545",
-	});
+	};
+
+	const [gym_details, set_gym_details] = useState(initial_state);
 
 	const [page_settings, set_page_settings] = useState({
 		name_field_disabled: true,
@@ -28,12 +44,17 @@ const GymDetails = () => {
 		mail_field_disabled: true,
 	});
 
-	const image_style = {
-		width: "100%",
-		height: "300px",
-		padding: "10%",
-		borderRadius: "50px",
-	};
+	function check_for_changes(){
+		if(gym_details.gym_id !== initial_state.gym_id || gym_details.gym_owner_id !== initial_state.gym_owner_id || gym_details.gym_name !== initial_state.gym_name
+			|| gym_details.gym_description !== initial_state.gym_description || gym_details.gym_picture_1_file_path !== initial_state.gym_picture_1_file_path ||
+			gym_details.gym_picture_2_file_path !== initial_state.gym_picture_2_file_path || gym_details.gym_picture_3_file_path !== initial_state.gym_picture_3_file_path
+			|| gym_details.gym_location !== initial_state.gym_location || gym_details.gym_email !== initial_state.gym_email
+			|| gym_details.gym_phone_number !== initial_state.gym_phone_number )
+			{
+				return true;
+			}
+		return false;
+	}
 
 	function handleChange(field, event){
 		event.persist();
@@ -43,6 +64,10 @@ const GymDetails = () => {
 			case "gym_phone": set_gym_details({ ...gym_details, gym_phone_number: event.target.value }); break;
 			case "gym_mail": set_gym_details({ ...gym_details, gym_email: event.target.value }); break;
 		}
+	}
+
+	function updateDetails(){
+		// Code for api call
 	}
 
 
@@ -184,6 +209,12 @@ const GymDetails = () => {
 					
 					</div>
                 </div>
+				{
+					check_for_changes() && <center> 
+						<button type="button" style={button_style} onClick={ event => updateDetails() }>Save</button> 
+						<button type="button" style={button_style} onClick={ event => set_gym_details({ ...initial_state })}>Cancel</button> 
+					</center>
+				}
     		</div>
     	</div>
     );
