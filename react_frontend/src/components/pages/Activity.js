@@ -1,10 +1,10 @@
 import React, { Fragment, Component } from 'react';
 
 /* Import components */
-import RockCyclingSchedules from '../layout/RockCyclingSchedules';
+import ActivitySchedules from '../layout/ActivitySchedules';
 import Modal from '../layout/Modal';
 
-class RockCycling extends Component {
+class Activity extends Component {
 	componentDidMount() {
     	const setTransparentToTrue = this.props.setTransparentToTrue;
     	setTransparentToTrue();
@@ -15,11 +15,11 @@ class RockCycling extends Component {
     		<Fragment>
         		<div className="top-background">
         		</div>
-        		<RockCyclingSchedules />
+        		<ActivitySchedules />
         		<Modal />
     		</Fragment>
   		);
 	}
 }
 
-export default RockCycling;
+export default Activity;

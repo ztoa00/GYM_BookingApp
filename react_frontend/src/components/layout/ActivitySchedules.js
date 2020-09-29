@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 /* Import logo image */
 
-const RockCyclingSchedules = () => {
+const ActivitySchedules = () => {
     return (
     	<div className="container">
     	<div className="col-12 schedule">
@@ -44,4 +44,4 @@ const RockCyclingSchedules = () => {
     );
 }
 
-export default RockCyclingSchedules;
+export default ActivitySchedules;

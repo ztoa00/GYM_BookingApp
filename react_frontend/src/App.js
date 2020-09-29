@@ -8,7 +8,7 @@ import BottomMenu from './components/layout/BottomMenu';
 
 // Routing Components
 import ActivitySelection from './components/pages/ActivitySelection';
-import RockCycling from './components/pages/RockCycling';
+import Activity from './components/pages/Activity';
 import Horarios from './components/pages/Horarios';
 import Edit from './components/pages/Edit';
 import Configuracion from './components/pages/Configuracion';
@@ -58,8 +58,8 @@ class App extends Component {
                     	<ActivitySelection setTransparentToFalse={setTransparentToFalse} />
                     </Route>        			
         			
-					<Route path='/rock-cycling'>
-                    	<RockCycling setTransparentToTrue={setTransparentToTrue} />
+					<Route path='/activity'>
+                    	<Activity setTransparentToTrue={setTransparentToTrue} />
                     </Route>        		
 									{ /* Calendar */ }	
         			<Route path='/horarios'> 
