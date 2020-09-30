@@ -58,9 +58,8 @@ class App extends Component {
                     	<ActivitySelection setTransparentToFalse={setTransparentToFalse} />
                     </Route>        			
         			
-					<Route path='/activity'>
-                    	<Activity setTransparentToTrue={setTransparentToTrue} />
-                    </Route>        		
+					<Route name="activity" path='/activity/:activityname' 
+					render={ props => <Activity setTransparentToTrue={setTransparentToTrue} {...props} />} />        		
 									{ /* Calendar */ }	
         			<Route path='/horarios'> 
                     	<Horarios mode={mode} setTransparentToFalse={setTransparentToFalse}/>

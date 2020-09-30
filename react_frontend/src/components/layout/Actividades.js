@@ -11,7 +11,6 @@ const rock_cycling = {
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: RockCycling,
-	url: "/rock-cycling",
 }
 
 const climbing = {
@@ -19,7 +18,6 @@ const climbing = {
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: Climbing,
-	url: "/rock-cycling",
 }
 
 const yoga = {
@@ -27,7 +25,6 @@ const yoga = {
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: Yoga,
-	url: "/rock-cycling",
 }
 
 const Actividades = () => {
@@ -77,7 +74,7 @@ const Actividades = () => {
 
 		{/* Seperated this as ActivityDescription, cause it changes with selected value from above */}
 		<ActivityDescription key={ selected_activity.name } name={ selected_activity.name } description={ selected_activity.description } 
-			rating={ selected_activity.rating } url={ selected_activity.url } />
+			rating={ selected_activity.rating } />
 
     </div>
     );

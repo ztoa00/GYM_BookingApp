@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom';
 
 /* Import logo image */
 
-const ActivitySchedules = () => {
+const ActivitySchedules = (props) => {
 
 	let activity = {
-		name: "Rock Cycling",
+		name: props.activity,
 		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dapibus libero sit amet quam dictum, id tempor arcu volutpat. Donec nec diam at ante ornare pulvinar.",
 		schedules: [
 			{
@@ -36,11 +36,11 @@ const ActivitySchedules = () => {
 				<h1 className="text-center">{ activity.name }</h1>
 				<p className="description-text">{ activity.description }</p>
 				{
-					activity.schedules.map( schedule => {
+					activity.schedules.map( (schedule, i) => {
 						return (
-							<div className="schedule-card col-12 row">
+							<div className="schedule-card col-12 row" key={ i }>
 								<div className="col-8">
-						<p><span id="time">{ schedule.time }</span> { schedule.name }</p>
+									<p><span id="time">{ schedule.time }</span> { schedule.name }</p>
 									<p><i className="fas fa-clock"></i> { schedule.clock }</p>
 								</div>
 								<div className="col-4">

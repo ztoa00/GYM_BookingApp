@@ -8,7 +8,6 @@ export default class ActivityDescription extends Component{
         this.name = props.name;
         this.description = props.description;
         this.rating = props.rating;
-        this.url = props.url;
     }
 
 
@@ -35,7 +34,7 @@ export default class ActivityDescription extends Component{
                         <p className="description-text">{ this.description }</p>
                         <br />
                         <div className="center-col-12">
-                            <button id="mas-info"><Link to={ this.url }>Mas Info</Link></button>
+                            <button id="mas-info"><Link to={  "/activity/" + this.name }>Mas Info</Link></button>
                         </div>
                         <div className="center-col-12">
                             <button id="reservar">Reservar</button>
