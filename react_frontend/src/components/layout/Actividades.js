@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
+
 import ActivityDescription from './ActvityDescription';
 
 /* Import logo image */
@@ -29,53 +31,47 @@ const yoga = {
 
 const Actividades = () => {
 	const activities = [yoga, rock_cycling, climbing];
-	const [activity, set_activity] = useState(1);    // index of the three activities;
+	const [activity, set_activity] = useState(0);    // index of the three activities;
 
-	const selected_activity = activities[activity];
+	const selected_activity = activities[0];
+
+	
+    const ratingStars = n => {
+        let icons = [];
+        for(let i=0; i<n; i++){
+            icons.push(<i className="fa fa-star" />)
+        }
+        return icons;
+    }
+
 	
     return (
 	<div className="jumbotron col-12 row">
     	<div className="carousel col-12">
-    		<h1 className="text-center"><i className="fas fa-bicycle" id="actividades-bicycle"></i>Actividades</h1>
-    		<div className="center-col-12 row sliding-images">
-    			
-				<div className="col-3" id="left">
-					{
-						activity > 0 &&
-						<img src={ activities[activity-1].image } id="left-image" onClick={ event => set_activity(activity - 1) }
-						 alt={ selected_activity.name }/> 
-					}
+    		<h1 className="text-center">Actividades</h1>
+			<hr />
+			<br />
+    		<center>
+				<div>
+				{
+					activities.map( activity => (
+						<div key={ activity.name } 
+						style={{display: "block", width: "70%", boxShadow: "2px 5px 50px gray", marginTop:"50px", padding:"2%", border: "2px solid orange"}}>
+							<h3>{ activity.name }&nbsp; &nbsp;{ ratingStars(activity.rating) }</h3>
+							<hr />
+							<img src={ activity.image } alt={ activity.name } style={{maxHeight: "300px", maxWidth: "50%"}}/>
+							<p style={{width: "60%"}}>{ activity.description }</p>
+							<hr />
+							<div style={{display: "flex", justifyContent: "space-evenly", width: "50%", marginTop: "2%"}}>
+								<button id="mas-info"><Link to={  "/activity/" + activity.name }>Mas Info</Link></button>
+								<button id="mas-info" style={{marginLeft: "2%"}}>Reservar</button>
+							</div>
+						</div>
+					))
+				}
 				</div>
-
-    			<div className="col-6">
-					<img src={ activities[activity].image } id="center-image" onClick={ event => set_activity(activity) } 
-					alt={ selected_activity.name }/>
-				</div>
-    			
-				<div className="col-3" id="right">
-					{
-						activity < activities.length-1 &&
-						<img src={ activities[activity+1].image } id="right-image" onClick={ event =>  set_activity(activity + 1) } 
-						alt={ selected_activity.name }/> 
-					}
-				</div>
-
-			</div>
-			<h2 className="text-center">
-				<span style={{cursor: "pointer"}} onClick={ event => {
-					if(activity > 0) set_activity(activity - 1);
-				}}>&#x25C4;</span>
-				<span style={{padding: '0 26px'}}>{ selected_activity.name }</span> 
-				<span style={{cursor: "pointer"}} onClick={ event => {
-					if(activity < activities.length-1) set_activity(activity + 1);
-				}}>&#x25BA;</span>
-			</h2>
+			</center>
     	</div>
-
-		{/* Seperated this as ActivityDescription, cause it changes with selected value from above */}
-		<ActivityDescription key={ selected_activity.name } name={ selected_activity.name } description={ selected_activity.description } 
-			rating={ selected_activity.rating } />
-
     </div>
     );
 }
