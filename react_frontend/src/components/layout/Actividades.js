@@ -9,21 +9,21 @@ import Climbing from './images/climbing.png';
 import Yoga from './images/yoga.png';
 
 const rock_cycling = {
-	name: "Rock Cycling / Buba gym",
+	name: "Rock Cycling - Buba gym",
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: RockCycling,
 }
 
 const climbing = {
-	name: "Climbing / Buba gym",
+	name: "Climbing - Buba gym",
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: Climbing,
 }
 
 const yoga = {
-	name: "Yoga / Buba gym",
+	name: "Yoga - Buba gym",
 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 	rating: 5,
 	image: Yoga,
