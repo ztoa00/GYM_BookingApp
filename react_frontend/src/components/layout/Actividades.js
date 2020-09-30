@@ -31,11 +31,7 @@ const yoga = {
 
 const Actividades = () => {
 	const activities = [yoga, rock_cycling, climbing];
-	const [activity, set_activity] = useState(0);    // index of the three activities;
 
-	const selected_activity = activities[0];
-
-	
     const ratingStars = n => {
         let icons = [];
         for(let i=0; i<n; i++){
