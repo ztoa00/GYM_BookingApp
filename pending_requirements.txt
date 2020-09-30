@@ -17,44 +17,17 @@ make input field with differnt color or give clarifcation of effect where the fi
 Input field is not visible on all pages clearly 
 this is not user friendly
 
-3)
-User Details page
-
-In MemberDetailsForm.js in component/layout and
-In OwnerDetailsForm.js in component/layout
-
-3.a)
-Profile pic to be fixed on circle or square but to be in fixed frame inside that we need to render the selected img
-3.b) 
-mouse over the button or image need to change like hand symbol or anyother to point that its also input or its have event 
-3.c) 
-send a form data to bacckend api
-3.d)
-remove style background in profile picture img tag
 
 4)
 Gym page
 
 4.a)
-You only created the display og gym details update button is not working on that
-we have to create gym details edit page same as GymDetails.js but we need to add input field with form and input fields already filled 
-If user already created gym or else 
+location
 
 4.b)
-it empty input fields for add gym
-{/* 
-		In gym db and api structure, we have
-		gym.id  {we need to send this id inside form as hidden input to api while updating}
-		gym.owner_id
-		gym.name
-		gym.description
-		gym.picture_1_file_path
-		gym.picture_2_file_path
-		gym.picture_3_file_path
-		gym.location
-		gym.email
-		gym.phone_number
-*/}
+images border and mousehover effects
+
+4.c) save changes or cancel button to call api 
 
 
 
