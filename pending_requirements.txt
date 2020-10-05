@@ -22,7 +22,7 @@ Pending Works :
     History page
 
     7.b)
-        in owner mode create activiy button is not working 
+        in owner mode create activity button is not working 
 
     7.c)
         create activiy page is not yet build create activiy or update activity page.
