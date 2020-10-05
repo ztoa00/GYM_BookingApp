@@ -1,78 +1,47 @@
-If you dont get what im saying in this file mean contact me or else make a skype call to share my screen to pointing the problems, 
-that may be more clear understanding
-
-
-
 
 Pending Works :
 
 
 1) 
-In all page we need add a flash message section
-
-2)
-Input Form fields
-
-make input field with differnt color or give clarifcation of effect where the field is exist 
-Input field is not visible on all pages clearly 
-this is not user friendly
+    In all page we need add a flash message section
 
 
 4)
-Gym page
+    Gym page
 
-4.a)
-location
+    4.a)
+        location
 
-4.b)
-images border and mousehover effects
-
-4.c) save changes or cancel button to call api 
-
+    4.b)
+        images border and mousehover effects
 
 
 5)
-issue
-whenever im in gym owner mode after any progress it take me to normal user mode why is this happening?
+    issue
+        whenever im in gym owner mode after any progress it take me to normal user mode why is this happening?
 
 
 
 6)
-Activity page
+    Activity page
 
-6.a)
-actvity swipe not working on desktop
+    6.b)
+        reserve button also not working on activty page
 
-6.b)
-reserve button also not working on activty page
-
-6.c)
-once i click more info it take to reservation page with timeslots of activiy , there not able to click the timeslot for reservation
+    6.c)
+        once i click more info it take to reservation page with timeslots of activiy , there not able to click the timeslot for reservation
 
 
 
 7)
-History page
+    History page
 
-7.a)
-my reserved activiy deletion button is not working
+    7.a)
+        my reserved activiy deletion button is not working
 
-7.b)
-in owner mode create activiy button is not working 
+    7.b)
+        in owner mode create activiy button is not working 
 
-7.c)
-create activiy page is not yet build create activiy or update activity page.
-we only have update activiy time slot page
-
-
-8)
-why you kept all form as empty? and why also you never code for call the apis ?
-
-what the use of packages.jsonlock file?
-
-
-9)
-refesh takes to homepage all time i think its due to we are serving index page only via backend may be thats the reason, 
-we need to fix this too.
-
-
+    7.c)
+        create activiy page is not yet build create activiy or update activity page.
+        we only have update activiy time slot page
