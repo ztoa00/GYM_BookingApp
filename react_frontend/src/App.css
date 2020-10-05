@@ -872,7 +872,11 @@ button {
   margin: 12px 0;
 }
 
-.schedule-card:hover {
+.schedule-card:hover{
+  box-shadow: -5px -3px 10px #00000029;
+}
+
+.schedule-card-select {
   background: linear-gradient(270deg, #F8D3AD, #E7BED6);
 }
 
@@ -909,7 +913,7 @@ button {
 }
 
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 1;
   padding-top: 100px;

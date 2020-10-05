@@ -1,9 +1,18 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 
 /* Import logo image */
 
 const ActivitySchedules = (props) => {
+
+	const toggle_modal = props.toggle_modal;
+	const set_schedule = props.set_schedule;
+
+	const [ selected_schedule, set_selected_schedule ] = useState(-1);
+
+	const show_warning = (msg) => {
+		alert(msg);
+	}
 
 	let activity = {
 		name: props.activity,
@@ -30,6 +39,7 @@ const ActivitySchedules = (props) => {
 		]
 	}
 
+
     return (
     	<div className="container">
     		<div className="col-12 schedule">
@@ -38,7 +48,9 @@ const ActivitySchedules = (props) => {
 				{
 					activity.schedules.map( (schedule, i) => {
 						return (
-							<div className="schedule-card col-12 row" key={ i }>
+							<div style={{cursor: "pointer"}} className={ 
+								selected_schedule == i ? "schedule-card col-12 row schedule-card-select": "schedule-card col-12 row"} 
+								key={ i } onClick={ event => { set_selected_schedule(i); set_schedule(schedule) } }>
 								<div className="col-8">
 									<p><span id="time">{ schedule.time }</span> { schedule.name }</p>
 									<p><i className="fas fa-clock"></i> { schedule.clock }</p>
@@ -52,7 +64,10 @@ const ActivitySchedules = (props) => {
 				}
 				
 				<div className="center-col-12">
-					<button id="reservar">Reservar</button>
+					<button id="reservar" style={{cursor: "pointer"}} onClick={ 
+						event => {
+							 selected_schedule !== -1 ? toggle_modal(true) : show_warning(" Select any event !") } 
+						}>Reservar</button>
 				</div>
 	    	</div>
     	</div>

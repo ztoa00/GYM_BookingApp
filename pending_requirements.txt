@@ -22,14 +22,6 @@ Pending Works :
 
 
 
-6)
-    Activity page
-
-    6.c)
-        once i click more info it take to reservation page with timeslots of activiy , there not able to click the timeslot for reservation
-
-
-
 7)
     History page
 
