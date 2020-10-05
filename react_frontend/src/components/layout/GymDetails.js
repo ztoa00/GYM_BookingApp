@@ -7,12 +7,6 @@ import Photo3 from './images/photo3.png';
 import Map_Image from './images/map.png';
 
 const GymDetails = () => {
-	const image_style = {
-		width: "100%",
-		height: "300px",
-		padding: "10%",
-		borderRadius: "50px",
-	};
 
 	const button_style = {
 		background: "lightblue",
@@ -122,8 +116,8 @@ const GymDetails = () => {
 							}
 						}
 					}} />
-    				<img id="pic1" src={ gym_details.gym_picture_1_file_path } alt="Photo 1" style={{ cursor: "pointer" }} 
-					onClick={ event => document.getElementById('pic1_file').click() } style={ image_style } />
+    				<img id="pic1" className="gym-edit-pic" src={ gym_details.gym_picture_1_file_path } alt="Photo 1"
+					onClick={ event => document.getElementById('pic1_file').click() }/>
 
     			</div>
 
@@ -139,8 +133,8 @@ const GymDetails = () => {
 							}
 						}
 					}}/>
-    				<img id="pic2" src={ gym_details.gym_picture_2_file_path } alt="Photo 2" style={{ cursor: "pointer" }} 
-					onClick={ event => document.getElementById('pic2_file').click() } style={ image_style }/>
+    				<img id="pic2" className="gym-edit-pic" src={ gym_details.gym_picture_2_file_path } alt="Photo 2" 
+					onClick={ event => document.getElementById('pic2_file').click() } />
     			
 				</div>    	
 
@@ -156,8 +150,8 @@ const GymDetails = () => {
 							}
 						}
 					}}/>
-    				<img id="pic3" src={ gym_details.gym_picture_3_file_path } alt="Photo 3" style={{ cursor: "pointer" }} 
-					onClick={ event => document.getElementById('pic3_file').click() } style={ image_style }/>
+    				<img id="pic3" className="gym-edit-pic" src={ gym_details.gym_picture_3_file_path } alt="Photo 3" style={{ cursor: "pointer" }} 
+					onClick={ event => document.getElementById('pic3_file').click() } />
 
     			</div>
 

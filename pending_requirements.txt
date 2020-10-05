@@ -12,9 +12,6 @@ Pending Works :
     4.a)
         location
 
-    4.b)
-        images border and mousehover effects
-
 
 5)
     issue
