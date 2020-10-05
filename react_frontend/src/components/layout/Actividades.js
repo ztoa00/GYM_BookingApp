@@ -51,16 +51,15 @@ const Actividades = () => {
 				<div>
 				{
 					activities.map( activity => (
-						<div key={ activity.name } 
-						style={{display: "block", width: "70%", boxShadow: "2px 5px 50px gray", marginTop:"50px", padding:"2%", border: "2px solid orange"}}>
+						<div className="activity" key={ activity.name } >
 							<h3>{ activity.name }&nbsp; &nbsp;{ ratingStars(activity.rating) }</h3>
 							<hr />
-							<img src={ activity.image } alt={ activity.name } style={{maxHeight: "300px", maxWidth: "50%"}}/>
+							<img src={ activity.image } alt={ activity.name }/>
 							<p style={{width: "60%"}}>{ activity.description }</p>
 							<hr />
 							<div style={{display: "flex", justifyContent: "space-evenly", width: "50%", marginTop: "2%"}}>
 								<button id="mas-info"><Link to={  "/activity/" + activity.name }>Mas Info</Link></button>
-								<button id="mas-info" style={{marginLeft: "2%"}}>Reservar</button>
+								<button id="mas-info" style={{marginLeft: "2%", cursor: "pointer"}}><Link to={  "/activity/" + activity.name }>Reservar</Link></button>
 							</div>
 						</div>
 					))

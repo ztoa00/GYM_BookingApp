@@ -1187,4 +1187,22 @@ input:checked + .slider:before {
   padding: 16px;
 }
 
+.activity{
+  display: block;
+  width: 70%;
+  box-shadow: 2px 5px 50px gray;
+  margin-top: 50px;
+  padding: 2%;
+  border: 2px solid orange;
+}
+
+.activity img{
+  max-height: 300px;
+  max-width: 50%;
+}
+
+.activity:hover{
+  box-shadow: 5px 5px 50px orange;
+}
+
 /*# sourceMappingURL=App.css.map */
