@@ -1,7 +1,63 @@
 import React, { Fragment, Component } from 'react';
+import TimeSlot from './TimeSlot';
 
 // Import images
+
+
+const init_timeslot = {
+	user: null,
+	day: null,
+	cost: null,
+	count: null,
+	duration: null,
+}
+
+
 class OwnerEditSchedule extends Component {
+
+	constructor(props){
+		super(props);
+		
+		this.state = {
+			name: null,
+			description: null,
+			timeslots: [],
+		}
+
+		this.set_timeslot = this.set_timeslot.bind(this);
+		this.saveActivity = this.saveActivity.bind(this);
+	}
+
+	set_timeslot(timeslot, index){
+		let new_timeslots = [];
+		this.state.timeslots.forEach((val, i) => {
+			if(index === i){
+				if(timeslot !== null){
+
+					//             API Call to save the timeslot if necessary
+					new_timeslots.push(timeslot);
+				}
+				else{
+					//           If null timeslot is being deleted.. API Call to delete the timeslot if necessary
+
+				}
+			}
+			else{
+				new_timeslots.push(val);
+			}
+		});
+
+		//  API Call if necessary
+
+		this.setState( prev => ({ ...prev, timeslots: new_timeslots }));
+	}
+
+
+	saveActivity(){
+		//   API Call to save activity if necessary
+	}
+
+
 	render() {
     	return (
         <Fragment>
@@ -15,38 +71,57 @@ class OwnerEditSchedule extends Component {
         	<div className="col-12 row">
         		<form className="editar-form">
             		<div className="col-12">
-            			<div className="col-6 edit-schedule">
-        					<i className="fas fa-calendar-alt"></i>
-							<input type="date" />
+						
+						<div className="col-9 edit-schedule">
+							<input type="text" placeholder="Name" value={ this.state.name } />
 						</div>
-        				<div className="col-6 edit-schedule" style={{ paddingLeft: '15pt' }}>
-        					<i className="fas fa-clock"></i>
-							<input type="text" />
-        				</div>
+						
+						<div className="col-12">
+							<div className="center-col-9 edit-schedule">
+								<i className="fa fa-file" style={{position: 'relative', bottom: '26px'}}></i>
+								<textarea placeholder="Description" 
+								style={{minWidth: "300px", minHeight: "100px", border: "2px solid lightgray", resize: "none"}}
+								 value={ this.state.description }></textarea>
+							</div>
+						</div>
+						<div className="center-col-12">
+
+							<h1 style={{width: "100%", borderBottom: "2px solid gray"}}>
+								Time Slots
+							</h1>
+							
+
+							<span style={{fontSize: 70, display: "block", color: "blue", cursor: "pointer"}} onClick={
+								event => {
+									this.setState( prev => {
+										let new_timeslots = prev.timeslots.slice(0);
+										new_timeslots.push({ ...init_timeslot });
+										return {
+											...prev,
+											timeslots: new_timeslots,
+										}
+									})
+								}
+							}> + </span>
+						</div>
+						
+						<div className="col-12">
+							{
+								this.state.timeslots.map((timeslot, index) => {
+									return (
+										<TimeSlot edit={false} timeslot={timeslot} index={index} set_timeslot={ this.set_timeslot } />
+									);
+								})
+							}
+						</div>
 					</div>
-            		<div className="col-12 row">
-            			<div className="col-4 edit-schedule" style={{position: 'relative', right: '8px'}}>
-        					<i className="fas fa-money-bill-wave"></i>
-							<input type="number" />
-						</div>
-            			<div className="col-4 edit-schedule" style={{ paddingLeft: '15pt' }}>
-        					<i className="fa fa-user"></i>
-							<input type="number" />
-						</div>
-            			<div className="col-4 edit-schedule" style={{ paddingLeft: '15pt' }}>
-        					<i className="fa fa-scissors"></i>
-							<input type="number" />
-						</div>
-					</div>
-            		<div className="col-12">
-            			<div className="col-8 edit-schedule">
-        					<i className="fa fa-file" style={{position: 'relative', bottom: '26px'}}></i>
-							<textarea placeholder="Description"></textarea>
-						</div>
-					</div>
+            		
 					<div className="center-col-12">
-						<button type="submit" className="blue" id="reservar">Confirmar</button>
+						<button type="submit" className="blue" id="reservar"  onClick={
+							event => this.saveActivity()
+						}>Confirmar</button>
 					</div>
+					<br />
         		</form>
         	</div>
 			</div>
