@@ -13,11 +13,6 @@ Pending Works :
         location
 
 
-5)
-    issue
-        whenever im in gym owner mode after any progress it take me to normal user mode why is this happening?
-
-
 7)
     History page
 

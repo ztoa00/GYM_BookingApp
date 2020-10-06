@@ -1,82 +1,95 @@
-import React,{Fragment} from 'react';
+import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 
 /* Import logo image */
 
 const OwnerSchedules = () => {
+
+	const initial_state = [
+		{
+			name: "Rock Cycling",
+			rating: 5,
+			time: 15,
+			day: "Martes",
+			clock: "11.00",
+			user: 7,
+		},
+		{
+			name: "Climbing",
+			rating: 5,
+			time: 17,
+			day: "Martes",
+			clock: "17.00",
+			user: 5,
+		},
+		{
+			name: "Running",
+			rating: 5,
+			time: 17,
+			day: "Jueves",
+			clock: "08.00",
+			user: 5,
+		},
+	]
+
+	const [ schedules, set_schedules ] = useState(initial_state);
+
+	const rating_stars = (rating) => {
+		let stars = [];
+		for(let i=0; i<rating; i++){
+			stars.push(<i className="fa fa-star" />);
+		}
+		return stars;
+	}
+
+	const remove_schedule = (schedule, index) => {
+
+		//   API call to remove schedule
+
+		let new_schedule = [];
+		schedules.forEach( (val, i) => {
+			if(index != i){
+				new_schedule.push(val);
+			}
+		})
+		set_schedules(new_schedule);
+	}
+
     return (
-    <Fragment>
-    	<div className="center-col-12">
-    		<div className="col-12 text-center horarios-lists">
-    			<i className="fas fa-calendar"></i>
-    			<h1 className="text-center">Actividades</h1>
-    		</div>
-    	</div>
-    	<div className="col-12 row horarios-lists" style={{marginTop: '0', paddingTop: '0'}}>
-    	<Link to='edit'> 
-    	<div className="schedule-card col-12 row" id="cycling">
-    		<div className="col-8">
-    			<h2>Rock Cycling</h2>
-                <i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-                <span>(5)</span>
-   			</div>
-   			<div className="col-4">
-            	<i className="fa fa-minus-circle"></i>
-    		</div>
-			<div className="col-12 schedule-card-details">
-   				<p><span className="blue-time">15</span> Martes</p>
-    			<p><i className="fa fa-clock"></i> 11.00</p>
-    			<p><i className="fa fa-user"></i> 7</p>
-            </div>
-    	</div>
-		</Link>
-    	<div className="schedule-card col-12 row" id="climbing">
-    		<div className="col-8">
-    			<h2>Climbing</h2>
-                <i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-                <span>(5)</span>
-   			</div>
-   			<div className="col-4">
-            	<i className="fa fa-minus-circle"></i>
-    		</div>
-			<div className="col-12 schedule-card-details">
-   				<p><span className="blue-time">17</span> Martes</p>
-    			<p><i className="fa fa-clock"></i> 17.00</p>
-    			<p><i className="fa fa-user"></i> 5</p>
-            </div>
-    	</div>
-   		<div className="schedule-card col-12 row" id="running">
-   			<div className="col-8">
-    			<h2>Running</h2>
-                <i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-               	<i className="fa fa-star" />
-                <span>(5)</span>
-   			</div>
-   			<div className="col-4">
-            	<i className="fa fa-minus-circle"></i>
-    		</div>
-			<div className="col-12 schedule-card-details">
-   				<p><span className="blue-time">17</span> Jueves</p>
-    			<p><i className="fa fa-clock"></i> 08.00</p>
-    			<p><i className="fa fa-user"></i> 5</p>
-            </div>
-    	</div>
-		<div className="center-col-12">
-        	<button className="blue" id="reservar">Cagar Nueva</button>
-        </div>
-    	</div>
-    </Fragment>
+		<Fragment>
+			<div className="center-col-12">
+				<div className="col-12 text-center horarios-lists">
+					<i className="fas fa-calendar"></i>
+					<h1 className="text-center">Actividades</h1>
+				</div>
+			</div>
+			<div className="col-12 row horarios-lists" style={{marginTop: '0', paddingTop: '0'}}>
+				{
+					schedules.map( (schedule, i) => {
+						return ( 
+							<div className="schedule-card col-12 row" id="cycling">
+								<div className="col-8">
+									<h2>{ schedule.name }</h2>
+									{ rating_stars(schedule.rating) }
+									<span>({ schedule.rating })</span>
+								</div>
+								<div className="col-4">
+									<i className="fa fa-minus-circle" onClick={ event => remove_schedule(schedule, i) }></i>
+								</div>
+								<div className="col-12 schedule-card-details">
+									<p><span className="blue-time">{ schedule.time }</span> { schedule.day } </p>
+									<p><i className="fa fa-clock"></i> { schedule.clock }</p>
+									<p><i className="fa fa-user"></i> { schedule.user }</p>
+								</div>
+							</div>							
+						);
+					})			
+				}
+				<div className="center-col-12">
+					<button className="blue" id="reservar"><Link to="edit">Cagar Nueva</Link></button>
+				</div>
+			</div>
+		</Fragment>
     );
 }
 

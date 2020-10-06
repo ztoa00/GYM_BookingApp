@@ -59,7 +59,7 @@ const MemberSchedules = () => {
 									<p><span id="time">{ schedule.time }</span> { schedule.day }</p>
 								</div>
 								<div className="col-4">
-									<i className="fa fa-minus-circle" onClick={ event => remove_schedule(schedule, i) }>d</i>
+									<i className="fa fa-minus-circle" onClick={ event => remove_schedule(schedule, i) }></i>
 									<p><i className="fa fa-clock"></i> { schedule.clock }</p>
 								</div>
 							</div>
