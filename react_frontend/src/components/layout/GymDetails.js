@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 
 import Photo1 from './images/photo1.png';
 import Photo2 from './images/photo2.png';
@@ -64,9 +64,11 @@ const GymDetails = () => {
 		// Code for api call
 	}
 
+	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
 
     return (
     	<div className="container">
+			<FlashMessages messages={ flash_messages } />
     		<div className="col-12 schedule gym-editar">
     			<div className="center-col-12 row gym-icon">
     				<i className="fas fa-dumbbell"></i>

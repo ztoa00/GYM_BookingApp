@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
-import ActivityDescription from './ActvityDescription';
+import FlashMessages from './FlashMessages';
 
 /* Import logo image */
 import RockCycling from './images/rock-cycling.png';
@@ -40,34 +40,38 @@ const Actividades = () => {
         return icons;
     }
 
-	
+	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+
     return (
-	<div className="jumbotron col-12 row">
-    	<div className="carousel col-12">
-    		<h1 className="text-center">Actividades</h1>
-			<hr />
-			<br />
-    		<center>
-				<div>
-				{
-					activities.map( activity => (
-						<div className="activity" key={ activity.name } >
-							<h3>{ activity.name }&nbsp; &nbsp;{ ratingStars(activity.rating) }</h3>
-							<hr />
-							<img src={ activity.image } alt={ activity.name }/>
-							<p style={{width: "60%"}}>{ activity.description }</p>
-							<hr />
-							<div style={{display: "flex", justifyContent: "space-evenly", width: "50%", marginTop: "2%"}}>
-								<button id="mas-info"><Link to={  "/activity/" + activity.name }>Mas Info</Link></button>
-								<button id="mas-info" style={{marginLeft: "2%", cursor: "pointer"}}><Link to={  "/activity/" + activity.name }>Reservar</Link></button>
-							</div>
+		<div>
+			<FlashMessages messages={ flash_messages } />
+			<div className="jumbotron col-12 row">
+				<div className="carousel col-12">
+					<h1 className="text-center">Actividades</h1>
+					<hr />
+					<br />
+					<center>
+						<div>
+						{
+							activities.map( activity => (
+								<div className="activity" key={ activity.name } >
+									<h3>{ activity.name }&nbsp; &nbsp;{ ratingStars(activity.rating) }</h3>
+									<hr />
+									<img src={ activity.image } alt={ activity.name }/>
+									<p style={{width: "60%"}}>{ activity.description }</p>
+									<hr />
+									<div style={{display: "flex", justifyContent: "space-evenly", width: "50%", marginTop: "2%"}}>
+										<button id="mas-info"><Link to={  "/activity/" + activity.name }>Mas Info</Link></button>
+										<button id="mas-info" style={{marginLeft: "2%", cursor: "pointer"}}><Link to={  "/activity/" + activity.name }>Reservar</Link></button>
+									</div>
+								</div>
+							))
+						}
 						</div>
-					))
-				}
+					</center>
 				</div>
-			</center>
-    	</div>
-    </div>
+			</div>
+		</div>
     );
 }
 

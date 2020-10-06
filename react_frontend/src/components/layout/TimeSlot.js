@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FlashMessages from './FlashMessages';
 
 
 export default class TimeSlot extends Component{
@@ -27,9 +28,12 @@ export default class TimeSlot extends Component{
     }
 
     render(){
+        const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+        
         return (
             
             <div className="timeslot" style={{display: "block"}} >
+                <FlashMessages messages={ flash_messages } />
                     <h2 style={{width: "60%"}}> Time Slot { this.index + 1 } 
                     <span style={{ color: "lightblue", cursor: "pointer", float: "right", fontSize:"40px"}} onClick={ event => this.setState(prev => {
                         return { ...prev, edit: !prev.edit }

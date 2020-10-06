@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 
-/* Import logo image */
 
 const ActivitySchedules = (props) => {
 
@@ -39,9 +38,11 @@ const ActivitySchedules = (props) => {
 		]
 	}
 
+	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
 
     return (
     	<div className="container">
+			<FlashMessages messages={ flash_messages} />
     		<div className="col-12 schedule">
 				<h1 className="text-center">{ activity.name }</h1>
 				<p className="description-text">{ activity.description }</p>

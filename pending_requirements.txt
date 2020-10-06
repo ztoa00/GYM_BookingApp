@@ -2,10 +2,6 @@
 Pending Works :
 
 
-1) 
-    In all page we need add a flash message section
-
-
 4)
     Gym page
 

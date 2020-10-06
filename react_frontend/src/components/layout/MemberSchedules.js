@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 
 /* Import logo image */
 
@@ -40,9 +41,11 @@ const MemberSchedules = () => {
 		});
 		set_schedules(new_schedule);
 	}
+	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
 
     return (
 		<Fragment>
+			<FlashMessages messages={ flash_messages } />
 			<div className="center-col-12">
 				<div className="col-12 text-center horarios-lists">
 					<i className="fas fa-calendar"></i>

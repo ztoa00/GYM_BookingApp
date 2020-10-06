@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import FlashMessages from './FlashMessages';
 import ProfilePic from './images/profile-picture.png';
 
 
@@ -98,147 +99,150 @@ class MemberDetailsForm extends Component {
 
 
 	render() {
+		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+
     	return (
-        <Fragment>
-			<div className="container">
-        	<div className="col-12 row">
-        		<form className="editar-form" onSubmit={this.submitForm}>
-            		<div className="col-12">
-            			<div className="col-6">
-        					
-							<label>Usuario</label>
-							<input type="text" value={ this.state.userid } onChange={
-								(event) => {
-									this.handleInput("userid", event);
-								}
-							}/>
-        					
-							<label>Nombre*</label>
-							<input type="text" value={ this.state.first_name } onChange={
-								(event) => {
-									this.handleInput("first_name", event);
-								}
-							} />
-        					
-							<label>Apellido*</label>
-							<input type="text"  value={ this.state.last_name } onChange={
-								(event) => {
-									this.handleInput("last_name", event);
-								}
-							}/>
-        					
-							<label>Fecha de nacimiento*</label>
-							<input type="text"  value={ this.state.dob } onChange={
-								(event) => {
-									this.handleInput("dob", event);
-								}
-							}/>
-
-						</div>
-
-						<div className="col-6 photo-box" >
-
-							<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
-								event => {
-									event.persist();
-									if(event.target.files[0] != undefined){
-										this.setState( prev => {
-											return { ...prev, profile_picture: event.target.files[0] }
-										})		
-									}
-								}
-							}/>
-							<center>
-								<img src={ (()=>{
-									if(this.state.profile_picture === null ){
-										return ProfilePic;
-									}
-									else{
-										let f = new FileReader();
-										f.readAsDataURL(this.state.profile_picture);
-										f.onload = res => {
-											document.getElementById('profile_pic_preview').src = res.target.result;
+			<Fragment>
+				<FlashMessages messages={ flash_messages } />
+				<div className="container">
+					<div className="col-12 row">
+						<form className="editar-form" onSubmit={this.submitForm}>
+							<div className="col-12">
+								<div className="col-6">
+									
+									<label>Usuario</label>
+									<input type="text" value={ this.state.userid } onChange={
+										(event) => {
+											this.handleInput("userid", event);
 										}
-									}
-								})()} 
-									alt="Your profile picture" id='profile_pic_preview' style={
-										{ width: '200px', cursor: 'pointer', height: "200px", borderRadius:"50%", border:"5px solid orange" }} 
-									onClick={ 
-										event => document.getElementById('profile_pic').click() 
-									} 
-								/>
-							</center>
-							<p className="text-center">Camblar foto</p>
+									}/>
+									
+									<label>Nombre*</label>
+									<input type="text" value={ this.state.first_name } onChange={
+										(event) => {
+											this.handleInput("first_name", event);
+										}
+									} />
+									
+									<label>Apellido*</label>
+									<input type="text"  value={ this.state.last_name } onChange={
+										(event) => {
+											this.handleInput("last_name", event);
+										}
+									}/>
+									
+									<label>Fecha de nacimiento*</label>
+									<input type="text"  value={ this.state.dob } onChange={
+										(event) => {
+											this.handleInput("dob", event);
+										}
+									}/>
 
-                        </div>
+								</div>
 
-					</div>
-            		<div className="col-12 row">
-            			<div className="col-6">
+								<div className="col-6 photo-box" >
 
-        					<label>Numero de telefono*</label>
-							<input type="tel" value={ this.state.phone } onChange={
-								(event) => {
-									this.handleInput("phone", event);
-								}
-							}/>
+									<input type="file" style={{display: 'none'}} id='profile_pic' onChange={ 
+										event => {
+											event.persist();
+											if(event.target.files[0] != undefined){
+												this.setState( prev => {
+													return { ...prev, profile_picture: event.target.files[0] }
+												})		
+											}
+										}
+									}/>
+									<center>
+										<img src={ (()=>{
+											if(this.state.profile_picture === null ){
+												return ProfilePic;
+											}
+											else{
+												let f = new FileReader();
+												f.readAsDataURL(this.state.profile_picture);
+												f.onload = res => {
+													document.getElementById('profile_pic_preview').src = res.target.result;
+												}
+											}
+										})()} 
+											alt="Your profile picture" id='profile_pic_preview' style={
+												{ width: '200px', cursor: 'pointer', height: "200px", borderRadius:"50%", border:"5px solid orange" }} 
+											onClick={ 
+												event => document.getElementById('profile_pic').click() 
+											} 
+										/>
+									</center>
+									<p className="text-center">Camblar foto</p>
 
-						</div>
-            			<div className="col-6" style={{ paddingLeft: '15pt' }}>
+								</div>
 
-        					<label>Tel. emergencia</label>
-							<input type="tel" value={ this.state.emergency_telephone } onChange={
-								(event) => {
-									this.handleInput("emergency_telephone", event);
-								}
-							}/>
-
-						</div>
-					</div>
-            		<div className="col-12">
-            			<div className="col-8">
-
-        					<label>Mail*</label>
-							<input type="email" value={ this.state.mail } onChange={
-								(event) => {
-									this.handleInput("mail", event);
-								}
-							}/>
-
-						</div>
-					</div>
-            		<div className="col-12 row">
-            			<div className="center-col-12 row upload">
-                        	<div className="col-6">
-        						<label>
-									<span>Certificado medico </span>
-						<span id="certificate_filename" style={{color: 'red'}}>{
-							this.state.certificate  !== null && ":" + this.state.certificate.name
-						}</span>
-								</label>
 							</div>
-                            <div className="col-6">
-								<input type="file" id="files" style={{ display: 'none' }} onChange={ 
-									event => {
-										event.persist();
-										if(event.target.files[0] != undefined){
-											this.setState(prev => {
-												return { ...prev, certificate: event.target.files[0] }
-											});
+							<div className="col-12 row">
+								<div className="col-6">
+
+									<label>Numero de telefono*</label>
+									<input type="tel" value={ this.state.phone } onChange={
+										(event) => {
+											this.handleInput("phone", event);
 										}
-									}
-								}/>
-								<button type="button" id="select-file" onClick={ event => document.getElementById('files').click() }>Cargar</button>
-                            </div>
-						</div>
+									}/>
+
+								</div>
+								<div className="col-6" style={{ paddingLeft: '15pt' }}>
+
+									<label>Tel. emergencia</label>
+									<input type="tel" value={ this.state.emergency_telephone } onChange={
+										(event) => {
+											this.handleInput("emergency_telephone", event);
+										}
+									}/>
+
+								</div>
+							</div>
+							<div className="col-12">
+								<div className="col-8">
+
+									<label>Mail*</label>
+									<input type="email" value={ this.state.mail } onChange={
+										(event) => {
+											this.handleInput("mail", event);
+										}
+									}/>
+
+								</div>
+							</div>
+							<div className="col-12 row">
+								<div className="center-col-12 row upload">
+									<div className="col-6">
+										<label>
+											<span>Certificado medico </span>
+								<span id="certificate_filename" style={{color: 'red'}}>{
+									this.state.certificate  !== null && ":" + this.state.certificate.name
+								}</span>
+										</label>
+									</div>
+									<div className="col-6">
+										<input type="file" id="files" style={{ display: 'none' }} onChange={ 
+											event => {
+												event.persist();
+												if(event.target.files[0] != undefined){
+													this.setState(prev => {
+														return { ...prev, certificate: event.target.files[0] }
+													});
+												}
+											}
+										}/>
+										<button type="button" id="select-file" onClick={ event => document.getElementById('files').click() }>Cargar</button>
+									</div>
+								</div>
+							</div>
+							<div className="center-col-12">
+								<button type="submit" id="reservar">Actualizar</button>
+							</div>
+						</form>
 					</div>
-					<div className="center-col-12">
-						<button type="submit" id="reservar">Actualizar</button>
-					</div>
-        		</form>
-        	</div>
-			</div>
-		</Fragment>
+				</div>
+			</Fragment>
         );
     }
 }

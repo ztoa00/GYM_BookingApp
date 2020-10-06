@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import FlashMessages from './FlashMessages';
 import TimeSlot from './TimeSlot';
 
 // Import images
@@ -59,8 +60,11 @@ class OwnerEditSchedule extends Component {
 
 
 	render() {
+		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+
     	return (
         <Fragment>
+			<FlashMessages messages={ flash_messages }/>
 			<div className="container">
         	<div className="col-12 row">
         		<h1 className="text-center">Actividad</h1>

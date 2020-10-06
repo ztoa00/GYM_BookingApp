@@ -1,13 +1,17 @@
 import React, {Fragment, Component} from 'react';
 import {Link} from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 
 /* Import images */
 import ProfilePicture from './images/profile-picture.png';
 
 class UserProfile extends Component {
     render() {
+		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+		
 		return (
 			<Fragment>
+				<FlashMessages messages={ flash_messages } />
 				<div className="col-12 row configuracion">
 					<div className="carousel col-12">				
 							{(this.props.mode === 'member-mode') ? (

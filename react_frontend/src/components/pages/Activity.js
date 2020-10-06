@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 
 /* Import components */
 import ActivitySchedules from '../layout/ActivitySchedules';
+import FlashMessages from '../layout/FlashMessages';
 import Modal from '../layout/Modal';
 
 class Activity extends Component {
@@ -40,8 +41,12 @@ class Activity extends Component {
 
 	render() {
 		const { activityname } = this.props.match.params;
+
+		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+
   		return (
     		<Fragment>
+				<FlashMessages messages={ flash_messages } />
         		<div className="top-background">
         		</div>
 				<ActivitySchedules key={ activityname } activity={ activityname } toggle_modal={ this.toggle_modal } set_schedule = { this.set_schedule }/>			

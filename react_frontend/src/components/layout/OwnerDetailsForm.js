@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 import ProfilePic from './images/profile-picture.png';
 
 
@@ -96,8 +97,11 @@ class OwnerDetailsForm extends Component {
 
 
 	render() {
+		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+
     	return (
         <Fragment>
+			<FlashMessages messages={ flash_messages } />
 			<div className="container">
         	<div className="col-12 row">
         		<form className="editar-form" onSubmit={this.submitForm}>

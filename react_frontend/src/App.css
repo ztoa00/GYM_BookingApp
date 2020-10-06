@@ -1225,5 +1225,32 @@ input:checked + .slider:before {
 }
 
 
+.flash-messages{
+  display: block;
+  position: fixed;
+  top: 160px;
+  z-index: 3;
+  width: 100%;
+}
+
+.flash-message{
+  display: block;
+  width: 50%;
+  padding: 1%;
+  color: white;
+  opacity: 0.8;
+  margin: auto;
+  margin-top: 1%;
+}
+
+
+.warning{
+  background-color: orange;
+}
+
+.success{
+  background-color: greenyellow;
+}
+
 
 /*# sourceMappingURL=App.css.map */
