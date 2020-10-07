@@ -16,7 +16,7 @@ const GymDetails = () => {
 		margin: "1%",
 	}
 
-	let initial_state = {
+	var initialstate = {
 		gym_id: null,
 		gym_owner_id: null,
 		gym_name: "Buba Gym",
@@ -29,6 +29,8 @@ const GymDetails = () => {
 		gym_phone_number: "+12345678545",
 	};
 
+	const [ initial_state, set_initial_state ] = useState({ ...initialstate });
+
 	const [gym_details, set_gym_details] = useState({ ...initial_state });
 
 	const [page_settings, set_page_settings] = useState({
@@ -38,6 +40,13 @@ const GymDetails = () => {
 		mail_field_disabled: true,
 	});
 
+
+	useEffect(
+		()=>{
+			set_gym_details({ ...initial_state, gym_name: "Hello World" });  // Set the gymdetails here and change the initial_state with same value also
+			set_initial_state({ ...initial_state, gym_name: "Hello World"});
+		}, []
+	)
 
 	function check_for_changes(){
 		if(gym_details.gym_id !== initial_state.gym_id || gym_details.gym_owner_id !== initial_state.gym_owner_id || gym_details.gym_name !== initial_state.gym_name
