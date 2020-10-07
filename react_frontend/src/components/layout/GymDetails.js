@@ -38,12 +38,6 @@ const GymDetails = () => {
 		mail_field_disabled: true,
 	});
 
-	useEffect(()=>{
-		initial_state = {
-			...initial_state,
-			gym_name: "Hello world",
-		}
-	}, [initial_state])
 
 	function check_for_changes(){
 		if(gym_details.gym_id !== initial_state.gym_id || gym_details.gym_owner_id !== initial_state.gym_owner_id || gym_details.gym_name !== initial_state.gym_name
