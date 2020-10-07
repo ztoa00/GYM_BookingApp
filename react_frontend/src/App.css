@@ -1252,5 +1252,9 @@ input:checked + .slider:before {
   background-color: greenyellow;
 }
 
+.timeslot input{
+  background-color: lightblue;
+}
+
 
 /*# sourceMappingURL=App.css.map */
