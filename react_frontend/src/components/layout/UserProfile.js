@@ -66,7 +66,8 @@ class UserProfile extends Component {
 						)
 					}
 					<div className="col-12 fit-bar">
-						<p><i className="fas fa-sign-out-alt"></i> Cerrar sesion</p>
+						{ /* assign crt url for logout in href below */}
+						<a href="#"><p><i className="fas fa-sign-out-alt"></i> Cerrar sesion</p></a>
 					</div>
 				</div>	
 			</Fragment>
