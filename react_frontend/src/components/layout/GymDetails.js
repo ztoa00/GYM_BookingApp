@@ -29,7 +29,7 @@ const GymDetails = () => {
 		gym_phone_number: "+12345678545",
 	};
 
-	const [gym_details, set_gym_details] = useState(initial_state);
+	const [gym_details, set_gym_details] = useState({ ...initial_state });
 
 	const [page_settings, set_page_settings] = useState({
 		name_field_disabled: true,
@@ -37,6 +37,13 @@ const GymDetails = () => {
 		phone_field_disabled: true,
 		mail_field_disabled: true,
 	});
+
+	useEffect(()=>{
+		initial_state = {
+			...initial_state,
+			gym_name: "Hello world",
+		}
+	}, [initial_state])
 
 	function check_for_changes(){
 		if(gym_details.gym_id !== initial_state.gym_id || gym_details.gym_owner_id !== initial_state.gym_owner_id || gym_details.gym_name !== initial_state.gym_name
@@ -114,7 +121,7 @@ const GymDetails = () => {
 							let f = new FileReader();
 							f.readAsDataURL(event.target.files[0]);
 							f.onload = res => {
-								document.getElementById('pic1').src = res.target.result;
+								set_gym_details({ ...gym_details, gym_picture_1_file_path: res.target.result });
 							}
 						}
 					}} />
@@ -131,7 +138,7 @@ const GymDetails = () => {
 							let f = new FileReader();
 							f.readAsDataURL(event.target.files[0]);
 							f.onload = res => {
-								document.getElementById('pic2').src = res.target.result;
+								set_gym_details({ ...gym_details, gym_picture_2_file_path: res.target.result });
 							}
 						}
 					}}/>
@@ -148,7 +155,7 @@ const GymDetails = () => {
 							let f = new FileReader();
 							f.readAsDataURL(event.target.files[0]);
 							f.onload = res => {
-								document.getElementById('pic3').src = res.target.result;
+								set_gym_details({ ...gym_details, gym_picture_3_file_path: res.target.result });
 							}
 						}
 					}}/>
