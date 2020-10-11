@@ -66,9 +66,7 @@ class App extends Component {
                     </Route>     
 					
 					{/* In the future, this Edit route will be added with the :id in the path*/}
-					<Route path='/edit'>
-                    	<Edit />
-                    </Route>
+					<Route path='/edit' render={ props => <Edit { ...props } /> } />
 
 									{ /* Profile */ }
         			<Route path='/configuracion'>

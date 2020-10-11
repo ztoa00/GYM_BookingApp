@@ -67,21 +67,28 @@ const OwnerSchedules = () => {
 				{
 					schedules.map( (schedule, i) => {
 						return ( 
-							<div className="schedule-card col-12 row" id="cycling">
-								<div className="col-8">
-									<h2>{ schedule.name }</h2>
-									{ rating_stars(schedule.rating) }
-									<span>({ schedule.rating })</span>
-								</div>
-								<div className="col-4">
-									<i className="fa fa-minus-circle" onClick={ event => remove_schedule(schedule, i) }></i>
-								</div>
-								<div className="col-12 schedule-card-details">
-									<p><span className="blue-time">{ schedule.time }</span> { schedule.day } </p>
-									<p><i className="fa fa-clock"></i> { schedule.clock }</p>
-									<p><i className="fa fa-user"></i> { schedule.user }</p>
-								</div>
-							</div>							
+							<div key={schedule.name}>
+							<Link to={{
+								pathname:"/edit",
+								state: {schedule: schedule},
+							}}>
+								<div className="schedule-card col-12 row" id="cycling">
+									<div className="col-8">
+										<h2>{ schedule.name }</h2>
+										{ rating_stars(schedule.rating) }
+										<span>({ schedule.rating })</span>
+									</div>
+									<div className="col-4">
+										<i className="fa fa-minus-circle" onClick={ event => remove_schedule(schedule, i) }></i>
+									</div>
+									<div className="col-12 schedule-card-details">
+										<p><span className="blue-time">{ schedule.time }</span> { schedule.day } </p>
+										<p><i className="fa fa-clock"></i> { schedule.clock }</p>
+										<p><i className="fa fa-user"></i> { schedule.user }</p>
+									</div>
+								</div>		
+							</Link>
+							</div>					
 						);
 					})			
 				}
