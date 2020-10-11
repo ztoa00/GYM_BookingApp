@@ -18,15 +18,36 @@ class OwnerEditSchedule extends Component {
 
 	constructor(props){
 		super(props);
-		
+
 		this.state = {
-			name: null,
-			description: null,
+			name: "",
+			description: "",
 			timeslots: [],
 		}
 
+				
+		try{
+			this.activity_schedule = this.props.location.state.schedule;
+			this.state = {
+				...this.state, name: this.activity_schedule.name,
+			}
+		}
+		catch(e){
+		}
+		
+		console.log(this.props);
 		this.set_timeslot = this.set_timeslot.bind(this);
 		this.saveActivity = this.saveActivity.bind(this);
+		this.handle_change = this.handle_change.bind(this);
+	}
+
+	handle_change(key, event){
+		event.persist();
+
+		switch(key){
+			case "name": this.setState(prev => ({ ... prev, name: event.target.value })); break;
+			case "description": this.setState(prev => ({ ... prev, description: event.target.value })); break;
+		}
 	}
 
 	set_timeslot(timeslot, index){
@@ -54,7 +75,7 @@ class OwnerEditSchedule extends Component {
 	}
 
 
-	saveActivity(){
+	saveActivity(event){
 		//   API Call to save activity if necessary
 	}
 
@@ -77,7 +98,9 @@ class OwnerEditSchedule extends Component {
             		<div className="col-12">
 						
 						<div className="col-9 edit-schedule">
-							<input type="text" placeholder="Name" value={ this.state.name } />
+							<input type="text" placeholder="Name" value={ this.state.name } onChange={ 
+								event => { this.handle_change("name", event)}
+								} />
 						</div>
 						
 						<div className="col-12">
@@ -85,9 +108,12 @@ class OwnerEditSchedule extends Component {
 								<i className="fa fa-file" style={{position: 'relative', bottom: '26px'}}></i>
 								<textarea placeholder="Description" 
 								style={{minWidth: "300px", minHeight: "100px", border: "2px solid lightgray", resize: "none"}}
-								 value={ this.state.description }></textarea>
+								 value={ this.state.description } onChange={
+									 event => { this.handle_change("description", event) }
+								 }></textarea>
 							</div>
 						</div>
+
 						<div className="center-col-12">
 
 							<h1 style={{width: "100%", borderBottom: "2px solid gray"}}>
@@ -121,7 +147,7 @@ class OwnerEditSchedule extends Component {
 					</div>
             		
 					<div className="center-col-12">
-						<button type="submit" className="blue" id="reservar"  onClick={
+						<button type="button" className="blue" id="reservar"  onClick={
 							event => this.saveActivity()
 						}>Confirmar</button>
 					</div>

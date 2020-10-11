@@ -37,7 +37,7 @@ const OwnerSchedules = () => {
 	const rating_stars = (rating) => {
 		let stars = [];
 		for(let i=0; i<rating; i++){
-			stars.push(<i className="fa fa-star" />);
+			stars.push(<i className="fa fa-star" key={i} />);
 		}
 		return stars;
 	}
