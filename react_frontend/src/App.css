@@ -889,11 +889,13 @@ button {
 
 .top-image {
   padding: 0;
-  background: url(background-images/horarios/rock-cycling.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-width: 50%;
   height: 148pt;
+  cursor: pointer;
+}
+
+.top-image:hover{
+  box-shadow: 2px 50px 50px 20px gray;
 }
 
 #time {

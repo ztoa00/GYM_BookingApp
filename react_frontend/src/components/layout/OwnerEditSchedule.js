@@ -3,7 +3,7 @@ import FlashMessages from './FlashMessages';
 import TimeSlot from './TimeSlot';
 
 // Import images
-
+import RockCycling from './images/rock-cycling.png';
 
 const init_timeslot = {
 	user: null,
@@ -22,7 +22,9 @@ class OwnerEditSchedule extends Component {
 		this.state = {
 			name: "",
 			description: "",
+			image: RockCycling,
 			timeslots: [],
+			flash_messages: [],
 		}
 
 				
@@ -39,6 +41,7 @@ class OwnerEditSchedule extends Component {
 		this.set_timeslot = this.set_timeslot.bind(this);
 		this.saveActivity = this.saveActivity.bind(this);
 		this.handle_change = this.handle_change.bind(this);
+		this.remove_flash_message = this.remove_flash_message.bind(this);
 	}
 
 	handle_change(key, event){
@@ -77,21 +80,50 @@ class OwnerEditSchedule extends Component {
 
 	saveActivity(event){
 		//   API Call to save activity if necessary
+		this.setState(prev => {
+			return { ...prev, flash_messages: [ ...prev.flash_messages, {message: "Success", warning: false }] }
+		});
+	}
+
+	remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<this.state.flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
+
+		this.setState(prev => ({ ...prev, flash_messages: new_flash_messages}));
 	}
 
 
 	render() {
-		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+		const flash_messages = this.state.flash_messages  // messages = { message: "your msg", warning: true/false }
 
     	return (
         <Fragment>
-			<FlashMessages messages={ flash_messages }/>
+			<FlashMessages messages={ flash_messages } remove_message={ this.remove_flash_message }/>
 			<div className="container">
         	<div className="col-12 row">
         		<h1 className="text-center">Actividad</h1>
         	</div>
-        	<div className="col-12 top-image">
-        
+        	<div className="col-12">
+				<input type="file" id="image_select" style={{display: "none"}} onChange={
+					event => {
+						let file_reader = new FileReader();
+						file_reader.readAsDataURL(event.target.files[0]);
+
+						file_reader.onload = res => {
+							let data = res.target.result;
+							this.setState( prev => ({...prev, image: data }))
+						}
+					}
+				} />
+				<center><img src={ this.state.image } alt="activity" className="top-image" onClick={
+					event => {
+						document.getElementById("image_select").click();
+					}
+				} /></center>
         	</div>
         	<div className="col-12 row">
         		<form className="editar-form">
