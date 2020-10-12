@@ -15,28 +15,29 @@ export default class FlashMessages extends Component{
         this.state = {
             messages: this.props.messages,
         }
-
         this.remove_message = this.remove_message.bind(this);
     }
 
+    componentDidUpdate(prev_props, prev_state){
+        if(prev_props.messages !== this.props.messages){
+            console.log(this.props.messages)
+            this.setState(prev => {
+                return ({...prev, messages: this.props.messages })
+            })
+        }
+    }
+
     remove_message(index){
-        let new_messages = [];
-        this.state.messages.forEach((msg, i) => {
-            if(i !== index){
-                new_messages.push(msg);
-            }
-        });
-        this.setState(prev => ({ ...prev, messages: new_messages }));
+        this.props.remove_message(index);
     }
 
     render(){
         return (
             <div className="flash-messages">
                 {
-                    this.state.messages.map((val, index) => {
-                        return <FlashMessage message={ val.message } warning={ val.warning } index={ index } key={ index + val.message }
-                        remove_message={ this.remove_message }/>
-                    })
+                    this.state.messages.length > 0 &&  
+                    <FlashMessage message={ this.state.messages[0].message } warning={ this.state.messages[0].warning } 
+                    index={ 0 } key={ 0+this.state.messages[0].message } remove_message={ this.remove_message }/>
                 }
             </div>
         );
