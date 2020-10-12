@@ -40,6 +40,8 @@ const GymDetails = () => {
 		mail_field_disabled: true,
 	});
 
+	const [flash_messages, set_flash_messages] = useState([]);
+
 
 	useEffect(
 		()=>{
@@ -74,11 +76,21 @@ const GymDetails = () => {
 		// Code for api call
 	}
 
-	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+	function remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
+
+		set_flash_messages(new_flash_messages);
+	}
+
 
     return (
     	<div className="container">
-			<FlashMessages messages={ flash_messages } />
+			<FlashMessages messages={ flash_messages } remove_message={remove_flash_message} />
     		<div className="col-12 schedule gym-editar">
     			<div className="center-col-12 row gym-icon">
     				<i className="fas fa-dumbbell"></i>

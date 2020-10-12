@@ -20,10 +20,12 @@ class MemberDetailsForm extends Component {
 			mail: "",
 			certificate: null,
 			profile_picture: null,
+			flash_messages: [],
 		}
 
 		this.handleInput = this.handleInput.bind(this);
 		this.submitForm = this.submitForm.bind(this);
+		this.remove_flash_message = this.remove_flash_message.bind(this);
 	}
 
 
@@ -97,13 +99,24 @@ class MemberDetailsForm extends Component {
 		});
 	}
 
+	remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<this.state.flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
+
+		this.setState(prev => ({ ...prev, flash_messages: new_flash_messages}));
+	}
+
 
 	render() {
-		const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+		const flash_messages = this.state.flash_messages;
 
     	return (
 			<Fragment>
-				<FlashMessages messages={ flash_messages } />
+				<FlashMessages messages={ flash_messages } remove_messages={ this.remove_flash_message } />
 				<div className="container">
 					<div className="col-12 row">
 						<form className="editar-form" onSubmit={this.submitForm}>

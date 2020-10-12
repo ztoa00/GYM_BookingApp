@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
+import FlashMessages from './FlashMessages';
 
 /* Import logo image */
 
@@ -34,6 +35,20 @@ const OwnerSchedules = () => {
 
 	const [ schedules, set_schedules ] = useState(initial_state);
 
+	const [flash_messages, set_flash_messages ] = useState([]);
+
+	function remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
+
+		set_flash_messages(new_flash_messages);
+	}
+
+
 	const rating_stars = (rating) => {
 		let stars = [];
 		for(let i=0; i<rating; i++){
@@ -57,6 +72,7 @@ const OwnerSchedules = () => {
 
     return (
 		<Fragment>
+			<FlashMessages messages={flash_messages} remove_message={ remove_flash_message } />
 			<div className="center-col-12">
 				<div className="col-12 text-center horarios-lists">
 					<i className="fas fa-calendar"></i>

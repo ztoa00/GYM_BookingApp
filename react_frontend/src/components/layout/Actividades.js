@@ -32,19 +32,31 @@ const yoga = {
 const Actividades = () => {
 	const activities = [yoga, rock_cycling, climbing];
 
+	const [flash_messages, set_flash_messages] = useState([]);
+
     const ratingStars = n => {
         let icons = [];
         for(let i=0; i<n; i++){
             icons.push(<i className="fa fa-star" />)
         }
         return icons;
-    }
+	}
+	
+	function remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
 
-	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+		set_flash_messages(new_flash_messages);
+	}
+
 
     return (
 		<div>
-			<FlashMessages messages={ flash_messages } />
+			<FlashMessages messages={ flash_messages } remove_message={remove_flash_message}  />
 			<div className="jumbotron col-12 row">
 				<div className="carousel col-12">
 					<h1 className="text-center">Actividades</h1>

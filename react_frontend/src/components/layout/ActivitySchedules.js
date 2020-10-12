@@ -38,11 +38,25 @@ const ActivitySchedules = (props) => {
 		]
 	}
 
-	const flash_messages = [];  // messages = { message: "your msg", warning: true/false }
+	const [flash_messages, set_flash_messages ] = useState([]);
+
+	function remove_flash_message(index){
+		let new_flash_messages = [];
+		for(let i=0; i<flash_messages.length; i++){
+			if(i !== index){
+				new_flash_messages.push(this.state.flash_messages[i]);
+			}
+		}
+
+		set_flash_messages(new_flash_messages);
+	}
+
+	
+
 
     return (
     	<div className="container">
-			<FlashMessages messages={ flash_messages} />
+			<FlashMessages messages={ flash_messages} remove_message={ remove_flash_message } />
     		<div className="col-12 schedule">
 				<h1 className="text-center">{ activity.name }</h1>
 				<p className="description-text">{ activity.description }</p>
