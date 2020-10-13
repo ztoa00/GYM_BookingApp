@@ -88,6 +88,12 @@ class MemberDetailsForm extends Component {
 			console.log(data);
 			if(!res.ok){
 				alert("retry");
+				this.setState({ 
+					flash_messages: [{ message: "updated", warning: true }] 
+				});
+				this.setState({ 
+					flash_messages: [{ message: "updated2", warning: false }] 
+				});
 			}
 			else{
 				let data = res.json();
